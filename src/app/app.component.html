@@ -4,39 +4,51 @@ title: Product example
 extra_css: "product.css"
 ---
 
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" href="#">Fixed navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+  <a class="navbar-brand mr-auto mr-lg-0" href="#">Offcanvas navbar</a>
+  <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse">
+
+  <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/customers" routerLinkActive="active">Customers <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Notifications</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <a class="nav-link" href="#">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Switch account</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
       </li>
     </ul>
-    <form class="form-inline mt-2 mt-md-0">
+    <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
 </nav>
-<!-- <router-outlet></router-outlet> -->
-<div class="position-relative overflow-hidden d-md-flex flex-md-equal w-100 bg-light container-fluid">
-  <div class="col-md-12 p-lg-5 mx-auto my-5">
-    <h1 class="display-4 font-weight-normal">Bike Store</h1>
+
+<div class="container-fluid pt-5">
+  <h1 class="d-md-flex justify-content-center">Bike Store</h1>
+  <section class="mat-typography">
     <router-outlet></router-outlet>
-<!--     <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple’s marketing pages.</p>
+  </section>
+  <!--     <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple’s marketing pages.</p>
     <a class="btn btn-outline-secondary" href="#">Coming soon</a> -->
-  </div>
-  <div class="product-device shadow-sm d-none d-md-block"></div>
-  <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+  <!--  <div class="product-device shadow-sm d-none d-md-block"></div>
+  <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div> -->
 </div>
 
 <!-- <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
@@ -107,12 +119,12 @@ extra_css: "product.css"
   </div>
 </div> -->
 
-<footer class="container py-5">
+<!-- <footer class="container py-5">
   <div class="row">
     <div class="col-12 col-md">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img" viewBox="0 0 24 24" focusable="false"><title>Product</title><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/></svg>
       <small class="d-block mb-3 text-muted">&copy; 2017-{{ site.time | date: "%Y" }}</small>
-    </div>
+    </div> 
     <div class="col-6 col-md">
       <h5>Features</h5>
       <ul class="list-unstyled text-small">
@@ -152,4 +164,4 @@ extra_css: "product.css"
       </ul>
     </div>
   </div>
-</footer>
+</footer> -->

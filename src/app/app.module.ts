@@ -6,6 +6,7 @@ import { UsersService } from './services/users.service';
 import { PostsService } from './services/posts.service';
 import { CustomerService } from './services/customer.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerDetailsComponent } from './components/customerdetails/customer-details.component';
 
@@ -18,6 +19,7 @@ import { CustomerDetailsComponent } from './components/customerdetails/customer-
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MaterialModule,
     BrowserAnimationsModule  
   ],
   providers: [UsersService, PostsService, CustomerService],
