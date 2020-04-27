@@ -3,6 +3,7 @@ import { PostsService } from './services/posts.service';
 import { UsersService } from './services/users.service';
 import { CustomerService } from './services/customer.service';
 import { CustomerDetailsComponent } from './components/customerdetails/customer-details.component';
+import { TopnavMenuComponent } from './components/topnav-menu/topnav-menu.component';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
     posts: any[] = [];*/
     customers: any[] = []; 
   user: string;
+  currentView: string;
   constructor(private _postService: PostsService, private _usersService: UsersService, private _customerService: CustomerService) {
 
 
@@ -27,6 +29,9 @@ export class AppComponent implements OnInit {
         //this.getCustomers();
   }
 
+  setCurrentView(view: string) {
+    this.currentView = view;
+  }
 
   /*  getUsers() {
      this._usersService.getUsers().subscribe((data)=>{

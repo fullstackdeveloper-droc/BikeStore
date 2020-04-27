@@ -9,11 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerDetailsComponent } from './components/customerdetails/customer-details.component';
+import { TopnavMenuComponent } from './components/topnav-menu/topnav-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomerDetailsComponent
+    CustomerDetailsComponent,
+    TopnavMenuComponent
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,13 @@
+<!-- 
 ---
-layout: examples
-title: Product example
+layout: shell of application
+title:  BikeStore Application
 extra_css: "product.css"
 ---
+-->
 
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-  <a class="navbar-brand mr-auto mr-lg-0" href="#">Offcanvas navbar</a>
+<!-- <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+  <a class="navbar-brand mr-auto mr-lg-0 pr-3" href="#">Bike Store MS</a>
   <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -13,24 +15,32 @@ extra_css: "product.css"
   <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+        <a class="nav-link" (click)="setCurrentView('Customers')" routerLink="/customers"
+          routerLinkActive="active">Customers <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Notifications</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Switch account</a>
+        <a class="nav-link" (click)="setCurrentView('Orders')" href="javascript:(void);">Orders</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown-products" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">Manage Products</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown-products">
+          <a class="dropdown-item" (click)="setCurrentView('Product MS')" href="javascript:(void);">Products</a>
+          <a class="dropdown-item" (click)="setCurrentView('Brand MS')" href="javascript:(void);">Brands</a>
+          <a class="dropdown-item" (click)="setCurrentView('Order MS')" href="javascript:(void);">Stocks</a>
         </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown-sales" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">Manage Sales</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown-sales">
+          <a class="dropdown-item" (click)="setCurrentView('Order Items MS')" href="javascript:(void);">Order Items</a>
+          <a class="dropdown-item" (click)="setCurrentView('Staff MS')" href="javascript:(void);">Staffs</a>
+          <a class="dropdown-item" (click)="setCurrentView('Stores MS')" href="javascript:(void);">Stores</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="setCurrentView('Dashboard')" href="javascript:(void);">Admin Dashboard</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -38,11 +48,15 @@ extra_css: "product.css"
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
-</nav>
+</nav> -->
+<app-topnav-menu></app-topnav-menu>
 
-<div class="container-fluid pt-5">
-  <h1 class="d-md-flex justify-content-center">Bike Store</h1>
-  <section class="mat-typography">
+<div class="container-fluid pt-3">
+   <!--  <div class="d-flex pb-3">
+      <div class="h2 flex-fill">Bike Store</div>
+      <div class="h2 flex-fill view-header">{{currentView}}</div>
+    </div> -->
+  <section class="mat-typography mx-3">
     <router-outlet></router-outlet>
   </section>
   <!--     <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple’s marketing pages.</p>
