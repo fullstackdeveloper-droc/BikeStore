@@ -10,22 +10,31 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerDetailsComponent } from './components/customerdetails/customer-details.component';
 import { TopnavMenuComponent } from './components/topnav-menu/topnav-menu.component';
+import { AppSpinnerComponent } from './components/widgets/app-spinner/app-spinner.component';
+import { MatTableModule } from '@angular/material/table';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerDetailsComponent,
-    TopnavMenuComponent
+    TopnavMenuComponent,
+    AppSpinnerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
-    BrowserAnimationsModule  
+    BrowserAnimationsModule,
+    MatTableModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule 
   ],
   providers: [UsersService, PostsService, CustomerService],
-  //exports: [CustomerDetailsComponent],
+  //exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,7 @@ import { UsersService } from './services/users.service';
 import { CustomerService } from './services/customer.service';
 import { CustomerDetailsComponent } from './components/customerdetails/customer-details.component';
 import { TopnavMenuComponent } from './components/topnav-menu/topnav-menu.component';
+import { AppSpinnerComponent } from './components/widgets/app-spinner/app-spinner.component';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,7 @@ import { TopnavMenuComponent } from './components/topnav-menu/topnav-menu.compon
 })
 export class AppComponent implements OnInit {
   title = 'technical-assessment';
-  /*   users: any[] = [];
-    posts: any[] = [];*/
-    customers: any[] = []; 
+  customers: any[] = [];
   user: string;
   currentView: string;
   constructor(private _postService: PostsService, private _usersService: UsersService, private _customerService: CustomerService) {
@@ -26,7 +25,14 @@ export class AppComponent implements OnInit {
     /*     this.getUsers();
         this.getPosts();
         this.getUser(1); */
-        //this.getCustomers();
+    //this.getCustomers();
+    /*  $(window).on('load', function() {
+       $("#cover").hide();
+    }); */
+    //this.showSpinner = true;
+    //this.msg = 'Loading Customers...';
+
+    
   }
 
   setCurrentView(view: string) {
