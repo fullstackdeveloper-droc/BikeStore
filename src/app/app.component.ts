@@ -22,17 +22,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*     this.getUsers();
-        this.getPosts();
-        this.getUser(1); */
-    //this.getCustomers();
-    /*  $(window).on('load', function() {
-       $("#cover").hide();
-    }); */
-    //this.showSpinner = true;
-    //this.msg = 'Loading Customers...';
-
-    
+ 
   }
 
   setCurrentView(view: string) {

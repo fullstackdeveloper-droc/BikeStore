@@ -4,6 +4,9 @@ import { AppSpinnerComponent } from '../widgets/app-spinner/app-spinner.componen
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { Customer } from '../models/customer';
+import { CustomerOrders } from '../models/customer-orders';
+import { Products } from '../models/products';
 
 @Component({
   selector: 'app-customer-details',
@@ -31,12 +34,25 @@ export class CustomerDetailsComponent implements OnInit {
   @ViewChildren('innerSort') innerSort: QueryList<MatSort>;
   @ViewChildren('innerTables') innerTables: QueryList<MatTable<Address>>;
 
-  dataSource: MatTableDataSource<User>;
+  /* dataSource: MatTableDataSource<User>;
   usersData: User[] = [];
   columnsToDisplay = ['name', 'email', 'phone'];
   innerDisplayedColumns = ['street', 'zipCode', 'city'];
-  expandedElement: User | null;
+  expandedElement: User | null; */
 
+  /* CUSTOMER DATA SOURCE
+  
+  dataSource: MatTableDataSource<Customer>;
+  customerData: Customer[] = [];
+  columnsToDisplay = ['Details', 'First Name', 'Last Name', 'Phone', 'Email', 'Street', 'City', 'State'];
+  innerDisplayedColumns = ['Order_Id', 'Order_Dt', 'Shipped_Dt', 'Order_Status', 'Store_Id'];
+  expandedElement: User | null; */
+
+  //== JDW: Products data source (just testing new API)
+  dataSource: MatTableDataSource<Products>;
+  customerData: Products[] = [];
+  columnsToDisplay = ['productName', 'modelYear', 'listPrice', 'brandId', 'categoryId', 'brandName', 'categoryName'];
+  columnsHeaders = ['Product', 'Model Year', 'List Price', 'Brand Id', 'Category Id', 'Brand Name', 'Category Name'];
 
   constructor(private _customerService: CustomerService, private cd: ChangeDetectorRef) { }
 
@@ -44,10 +60,11 @@ export class CustomerDetailsComponent implements OnInit {
     this.showSpinner = true;
     this.msg = 'Loading Customers...';
     //this.getCustomers();
+    this.getAllCustomerOrders();
 
 
     //== JDW: This is the setup for parent/child table using Material Table
-    USERS.forEach(user => {
+   /*  USERS.forEach(user => {
       if (user.addresses && Array.isArray(user.addresses) && user.addresses.length) {
         this.usersData = [...this.usersData, {...user, addresses: new MatTableDataSource(user.addresses)}];
       } else {
@@ -56,7 +73,7 @@ export class CustomerDetailsComponent implements OnInit {
     });
     this.dataSource = new MatTableDataSource(this.usersData);
     this.dataSource.sort = this.sort; 
-
+ */
     /* $(window).on('load', function() {
       $("#cover").hide();
    }); */
@@ -64,9 +81,56 @@ export class CustomerDetailsComponent implements OnInit {
   }
 
   getCustomers() {
-    this._customerService.getCustomers().subscribe((data)=>{
+    this._customerService.getCustomers().subscribe((data)=>{//.getCustomerOrders(7).subscribe((data)=>{
       console.log(data);
-      this.customers = data;
+      this.customerData = data;
+
+      /* data.forEach(user => {
+        if (user.addresses && Array.isArray(user.addresses) && user.addresses.length) {
+          this.usersData = [...this.usersData, {...user, addresses: new MatTableDataSource(user.addresses)}];
+        } else {
+          this.usersData = [...this.usersData, user];
+        }
+      }); */
+      this.dataSource = new MatTableDataSource(this.customerData);
+      this.dataSource.sort = this.sort; 
+
+      setTimeout(() => {
+        this.showSpinner = false;
+      }, 700);
+      /* $(window).on('load', function() {
+        $("#cover").hide();
+     }); */
+
+     /*  $(window).on('load', function () {
+        $("#cover").fadeOut(200);
+      }); */
+    
+      //== stackoverflow does not fire the window onload properly, substituted with fake load ==
+    
+      /* function newW() {
+        $(window).load();
+      } */
+    
+      //setTimeout(newW, 1000);
+    });
+  } 
+
+  getAllCustomerOrders() {
+    this._customerService.getCustomerOrders(7).subscribe((data)=>{//.getCustomerOrders(7).subscribe((data)=>{
+      console.log(data);
+      this.customerData = data;
+
+      /* data.forEach(user => {
+        if (user.addresses && Array.isArray(user.addresses) && user.addresses.length) {
+          this.usersData = [...this.usersData, {...user, addresses: new MatTableDataSource(user.addresses)}];
+        } else {
+          this.usersData = [...this.usersData, user];
+        }
+      }); */
+      this.dataSource = new MatTableDataSource(this.customerData);
+      this.dataSource.sort = this.sort; 
+
       setTimeout(() => {
         this.showSpinner = false;
       }, 700);
@@ -89,7 +153,7 @@ export class CustomerDetailsComponent implements OnInit {
   } 
 
   //== this is for new angular material table
-  toggleRow(element: User) {
+  /* toggleRow(element: CustomerOrders) {
     element.addresses && (element.addresses as MatTableDataSource<Address>).data.length ? (this.expandedElement = this.expandedElement === element ? null : element) : null;
     this.cd.detectChanges();
     this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Address>).sort = this.innerSort.toArray()[index]);
@@ -97,7 +161,7 @@ export class CustomerDetailsComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Address>).filter = filterValue.trim().toLowerCase());
-  }
+  } */
 }
 
 //== this is for the example for the page using Angular Material

@@ -14,13 +14,15 @@ import { AppSpinnerComponent } from './components/widgets/app-spinner/app-spinne
 import { MatTableModule } from '@angular/material/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { ProductsComponent } from './components/products/products.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerDetailsComponent,
     TopnavMenuComponent,
-    AppSpinnerComponent
+    AppSpinnerComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

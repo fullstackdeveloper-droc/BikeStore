@@ -59,3 +59,12 @@
     margin-top: 15px;
     width: 100%;
   }
+
+  .mat-header-cell {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.mat-cell, .mat-footer-cell {
+  font-size: 12px;
+}

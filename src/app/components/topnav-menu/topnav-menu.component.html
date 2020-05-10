@@ -15,8 +15,7 @@ extra_css: "product.css"
   <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" (click)="setCurrentView('Customers')" routerLink="/customers"
-          routerLinkActive="active">Customers <span class="sr-only">(current)</span></a>
+        <a class="nav-link" (click)="setCurrentView('Customers')" routerLink="/customers">Customers <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" (click)="setCurrentView('Orders')" href="javascript:(void);">Orders</a>
@@ -25,7 +24,7 @@ extra_css: "product.css"
         <a class="nav-link dropdown-toggle" href="#" id="dropdown-products" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">Manage Products</a>
         <div class="dropdown-menu" aria-labelledby="dropdown-products">
-          <a class="dropdown-item" (click)="setCurrentView('Product MS')" href="javascript:(void);">Products</a>
+          <a class="dropdown-item" (click)="setCurrentView('Product MS')" href="javascript:(void);" routerLink="/products">Products</a>
           <a class="dropdown-item" (click)="setCurrentView('Brand MS')" href="javascript:(void);">Brands</a>
           <a class="dropdown-item" (click)="setCurrentView('Order MS')" href="javascript:(void);">Stocks</a>
         </div>
