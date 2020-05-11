@@ -68,3 +68,17 @@
 .mat-cell, .mat-footer-cell {
   font-size: 12px;
 }
+
+.mat-row:nth-child(2n+1){
+  background-color: #e4f0ec;
+}
+.mat-row:not(:nth-child(4n+1)){
+  background-color:#ffffff;
+}
+
+.mat-row:nth-child(even){
+  background-color: #e4f0ec;
+}
+.mat-row:not(:nth-child(odd)){
+  background-color:#ffffff;
+}

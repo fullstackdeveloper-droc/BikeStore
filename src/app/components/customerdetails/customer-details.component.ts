@@ -7,6 +7,7 @@ import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { Customer } from '../models/customer';
 import { CustomerOrders } from '../models/customer-orders';
 import { Products } from '../models/products';
+import { Order } from '../models/order';
 
 @Component({
   selector: 'app-customer-details',
@@ -32,7 +33,7 @@ export class CustomerDetailsComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChildren('innerSort') innerSort: QueryList<MatSort>;
-  @ViewChildren('innerTables') innerTables: QueryList<MatTable<Address>>;
+  @ViewChildren('innerTables') innerTables: QueryList<MatTable<Order>>;
 
   /* dataSource: MatTableDataSource<User>;
   usersData: User[] = [];
@@ -40,27 +41,30 @@ export class CustomerDetailsComponent implements OnInit {
   innerDisplayedColumns = ['street', 'zipCode', 'city'];
   expandedElement: User | null; */
 
-  /* CUSTOMER DATA SOURCE
+  /* CUSTOMER DATA SOURCE (just testing new API)*/
   
   dataSource: MatTableDataSource<Customer>;
   customerData: Customer[] = [];
-  columnsToDisplay = ['Details', 'First Name', 'Last Name', 'Phone', 'Email', 'Street', 'City', 'State'];
-  innerDisplayedColumns = ['Order_Id', 'Order_Dt', 'Shipped_Dt', 'Order_Status', 'Store_Id'];
-  expandedElement: User | null; */
+  columnsToDisplay = ['firstName', 'lastName', 'phone', 'email', 'street', 'city', 'state'];
+  innerDisplayedColumns = ['orderId', 'orderDate', 'shippedDate', 'orderStatus', 'storeId'];
+  propertiesToDisplay = ['firstName', 'lastName', 'phone', 'email', 'street', 'city', 'state'];
+  expandedElement: Customer | null; 
+  orders: Order[] = [];
+  customer: Customer;
 
   //== JDW: Products data source (just testing new API)
-  dataSource: MatTableDataSource<Products>;
-  customerData: Products[] = [];
+  /* dataSource: MatTableDataSource<Customer>;
+  customerData: Customer[] = [];
   columnsToDisplay = ['productName', 'modelYear', 'listPrice', 'brandId', 'categoryId', 'brandName', 'categoryName'];
-  columnsHeaders = ['Product', 'Model Year', 'List Price', 'Brand Id', 'Category Id', 'Brand Name', 'Category Name'];
+  columnsHeaders = ['Product', 'Model Year', 'List Price', 'Brand Id', 'Category Id', 'Brand Name', 'Category Name']; */
 
   constructor(private _customerService: CustomerService, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.showSpinner = true;
     this.msg = 'Loading Customers...';
-    //this.getCustomers();
-    this.getAllCustomerOrders();
+    this.getCustomers();
+    //this.getAllCustomerOrders();
 
 
     //== JDW: This is the setup for parent/child table using Material Table
@@ -83,7 +87,17 @@ export class CustomerDetailsComponent implements OnInit {
   getCustomers() {
     this._customerService.getCustomers().subscribe((data)=>{//.getCustomerOrders(7).subscribe((data)=>{
       console.log(data);
-      this.customerData = data;
+      data.forEach(cust => {
+        if (cust.orders && Array.isArray(cust.orders) && cust.orders.length) {
+          this.customerData = [...this.customerData,  {...cust, orders: new MatTableDataSource(cust.orders)}];
+        } else {
+          this.customerData = [...this.customerData, cust];
+        }
+      }); 
+
+
+      //this.dataSource = new MatTableDataSource(this.customerData);
+      //this.dataSource.sort = this.sort; 
 
       /* data.forEach(user => {
         if (user.addresses && Array.isArray(user.addresses) && user.addresses.length) {
@@ -98,28 +112,17 @@ export class CustomerDetailsComponent implements OnInit {
       setTimeout(() => {
         this.showSpinner = false;
       }, 700);
-      /* $(window).on('load', function() {
-        $("#cover").hide();
-     }); */
 
-     /*  $(window).on('load', function () {
-        $("#cover").fadeOut(200);
-      }); */
-    
-      //== stackoverflow does not fire the window onload properly, substituted with fake load ==
-    
-      /* function newW() {
-        $(window).load();
-      } */
-    
-      //setTimeout(newW, 1000);
+      setTimeout(() => {
+        this.showSpinner = false;
+      }, 700);
     });
   } 
 
   getAllCustomerOrders() {
     this._customerService.getCustomerOrders(7).subscribe((data)=>{//.getCustomerOrders(7).subscribe((data)=>{
       console.log(data);
-      this.customerData = data;
+      this.customer = data;
 
       /* data.forEach(user => {
         if (user.addresses && Array.isArray(user.addresses) && user.addresses.length) {
@@ -134,35 +137,22 @@ export class CustomerDetailsComponent implements OnInit {
       setTimeout(() => {
         this.showSpinner = false;
       }, 700);
-      /* $(window).on('load', function() {
-        $("#cover").hide();
-     }); */
-
-     /*  $(window).on('load', function () {
-        $("#cover").fadeOut(200);
-      }); */
-    
-      //== stackoverflow does not fire the window onload properly, substituted with fake load ==
-    
-      /* function newW() {
-        $(window).load();
-      } */
-    
-      //setTimeout(newW, 1000);
     });
   } 
 
   //== this is for new angular material table
-  /* toggleRow(element: CustomerOrders) {
-    element.addresses && (element.addresses as MatTableDataSource<Address>).data.length ? (this.expandedElement = this.expandedElement === element ? null : element) : null;
+  toggleRow(element: Customer) {
+    element.orders && (element.orders as MatTableDataSource<Order>).data.length ? (this.expandedElement = this.expandedElement === element ? null : element) : null;
     this.cd.detectChanges();
-    this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Address>).sort = this.innerSort.toArray()[index]);
+    this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Order>).sort = this.innerSort.toArray()[index]);
   }
 
   applyFilter(filterValue: string) {
-    this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Address>).filter = filterValue.trim().toLowerCase());
-  } */
+    this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Order>).filter = filterValue.trim().toLowerCase());
+  } 
 }
+
+//===============  SOME EXAMPLES OF CREATING MATTABLES IN CLASS MODEL FILES  ===================================================//
 
 //== this is for the example for the page using Angular Material
 export interface User {
