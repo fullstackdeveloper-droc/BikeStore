@@ -8,6 +8,12 @@ import { Customer } from '../models/customer';
 import { CustomerOrders } from '../models/customer-orders';
 import { Products } from '../models/products';
 import { Order } from '../models/order';
+import { PonyService } from '../widgets/pagination/pagination-pony.service';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Observable, Subject, merge } from 'rxjs';
+import { Page } from '../models/page';
+import { debounceTime, startWith, switchMap, share } from 'rxjs/operators';
+import { CustomersComponent } from '../customers/customers.component';
 
 @Component({
   selector: 'app-customer-details',
@@ -21,7 +27,7 @@ import { Order } from '../models/order';
     ]),
   ],
 })
-export class CustomerDetailsComponent implements OnInit {
+export class CustomerDetailsComponent { // implements OnInit {
   customers: any[] = [];
   msg: string = '';
   showSpinner: boolean = true;
@@ -52,15 +58,46 @@ export class CustomerDetailsComponent implements OnInit {
   orders: Order[] = [];
   customer: Customer;
 
+  filterForm: FormGroup;
+  page: Observable<Page<Customer>>
+  pageUrl = new Subject<string>();
+
   //== JDW: Products data source (just testing new API)
   /* dataSource: MatTableDataSource<Customer>;
   customerData: Customer[] = [];
   columnsToDisplay = ['productName', 'modelYear', 'listPrice', 'brandId', 'categoryId', 'brandName', 'categoryName'];
   columnsHeaders = ['Product', 'Model Year', 'List Price', 'Brand Id', 'Category Id', 'Brand Name', 'Category Name']; */
 
-  constructor(private _customerService: CustomerService, private cd: ChangeDetectorRef) { }
+  constructor (
+    private _customerService: CustomerService, 
+    private cd: ChangeDetectorRef,
+    private _ponyService: PonyService
+    ) { 
 
-  ngOnInit() {
+    //#region ** pony service, component, and widget for reusable server-side pagination, FOR NOW USING ANGULAR MATERIAL SERVER-SIDE **
+    /* this.filterForm = new FormGroup({
+      is_available: new FormControl(),
+      search: new FormControl()
+    });
+
+    const filterValue = this.filterForm.valueChanges.pipe(
+      debounceTime(200),
+      startWith(this.filterForm.value),
+    );
+    this.page = merge(filterValue, this.pageUrl).pipe(
+      switchMap(urlOrFilter => this._ponyService.list(urlOrFilter)),
+      share()
+    ); */
+    //#endregion
+  
+  
+  }
+
+  onPageChanged(url: string) {
+    this.pageUrl.next(url);
+  }
+
+/*  ngOnInit() {
     this.showSpinner = true;
     this.msg = 'Loading Customers...';
     this.getCustomers();
@@ -68,7 +105,7 @@ export class CustomerDetailsComponent implements OnInit {
 
 
     //== JDW: This is the setup for parent/child table using Material Table
-   /*  USERS.forEach(user => {
+   USERS.forEach(user => {
       if (user.addresses && Array.isArray(user.addresses) && user.addresses.length) {
         this.usersData = [...this.usersData, {...user, addresses: new MatTableDataSource(user.addresses)}];
       } else {
@@ -77,12 +114,12 @@ export class CustomerDetailsComponent implements OnInit {
     });
     this.dataSource = new MatTableDataSource(this.usersData);
     this.dataSource.sort = this.sort; 
- */
-    /* $(window).on('load', function() {
+ 
+     $(window).on('load', function() {
       $("#cover").hide();
-   }); */
+   });
     //this.customers = this.customerDetails;
-  }
+  } */
 
   getCustomers() {
     this._customerService.getCustomers().subscribe((data)=>{//.getCustomerOrders(7).subscribe((data)=>{

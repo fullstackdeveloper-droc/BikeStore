@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PostsService } from './services/posts.service';
 import { UsersService } from './services/users.service';
 import { CustomerService } from './services/customer.service';
-import { CustomerDetailsComponent } from './components/customerdetails/customer-details.component';
+//import { CustomerDetailsComponent } from './components/customerdetails/customer-details.component';
 import { TopnavMenuComponent } from './components/topnav-menu/topnav-menu.component';
 import { AppSpinnerComponent } from './components/widgets/app-spinner/app-spinner.component';
+import { CustomersComponent } from './components/customers/customers.component';
 
 @Component({
   selector: 'app-root',

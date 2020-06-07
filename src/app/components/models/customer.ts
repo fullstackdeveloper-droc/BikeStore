@@ -1,7 +1,7 @@
 import { Order } from "./order";
 import { MatTableDataSource } from "@angular/material/table";
 
-export class Customer {
+export declare class Customer {
     public customerId: number;
     public firstName: string;
     public lastName: string; 

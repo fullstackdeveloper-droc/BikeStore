@@ -22,10 +22,11 @@ extra_css: "product.css"
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown-products" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">Manage Products</a>
+          aria-expanded="false">Products Dashboard</a>
         <div class="dropdown-menu" aria-labelledby="dropdown-products">
           <a class="dropdown-item" (click)="setCurrentView('Product MS')" href="javascript:(void);" routerLink="/products">Products</a>
-          <a class="dropdown-item" (click)="setCurrentView('Brand MS')" href="javascript:(void);">Brands</a>
+          <a class="dropdown-item" (click)="setCurrentView('Brand MS')" href="javascript:(void);" routerLink="/products/brands">Brands</a>
+          <a class="dropdown-item" (click)="setCurrentView('Order MS')" href="javascript:(void);">Categories</a>
           <a class="dropdown-item" (click)="setCurrentView('Order MS')" href="javascript:(void);">Stocks</a>
         </div>
       </li>
